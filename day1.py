@@ -22,7 +22,7 @@ def apply_frequencies(frequencies: List[int], start: int = 0) -> Generator[int, 
 
 if __name__ == '__main__':
 
-    data = read_frequencies('day_1_frequencies.in')
+    data = read_frequencies('day1.in')
 
     final_frequency = 0
     for frequency in apply_frequencies(data):

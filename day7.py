@@ -18,7 +18,11 @@ class Step:
     Represents a single step and contains references to the steps before it
     and after it.
     """
-    def __init__(self, name: str, post: List['Step'], pre: List['Step'], state: State = State.NOT_STARTED) -> None:
+    def __init__(self,
+                 name: str,
+                 post: List['Step'],
+                 pre: List['Step'],
+                 state: State = State.NOT_STARTED) -> None:
         self.name = name
         self.post = post
         self.pre = pre

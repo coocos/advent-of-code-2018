@@ -81,10 +81,7 @@ def close_to_all(coord: Coord, coords: List[Coord], tolerance: int) -> bool:
     Returns True if coordinate is within a specified distance to all known
     coordinates and False if not
     """
-    total = 0
-    for target in coords:
-        total += manhattan(coord, target)
-    return total < tolerance
+    return sum(manhattan(coord, target) for target in coords) < tolerance
 
 
 def area_near_locations(coords: List[Coord], tolerance: int = 30) -> int:

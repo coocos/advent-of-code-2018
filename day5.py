@@ -13,9 +13,6 @@ def trigger_reactions(polymer: str) -> str:
     the current one but differ in capitalization then they are removed from
     the string and the algorithm starts again but this time one unit earlier
     than the current position.
-
-    # TODO: You can probably just push all the letters to a stack and then
-    # pop them - always comparing one against the next
     """
     i = 0
     while i < len(polymer) - 1:

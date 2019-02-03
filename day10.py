@@ -77,17 +77,11 @@ def render(points: List[Point]) -> None:
     lights = set((point.x, point.y) for point in points)
     top_left, bottom_right = bounding_box(points)
 
-    # NOTE: This could be a lot cleaner
-    rows = []
     for y in range(top_left.y, bottom_right.y + 1):
-        row = ''
         for x in range(top_left.x, bottom_right.x + 1):
-            if (x, y) in lights:
-                row += '*'
-            else:
-                row += '.'
-        rows.append(row)
-    print('\n'.join(rows))
+            char = '*' if (x, y) in lights else '.'
+            print(char, end='')
+        print('\n', end='')
 
 
 def find_message(points: List[Point]) -> int:
@@ -103,7 +97,7 @@ def find_message(points: List[Point]) -> int:
 
     while not found_message:
 
-        # Update points and compute 
+        # Update points and compute
         for point in points:
             point.update()
         current_area = area(points)

@@ -80,7 +80,8 @@ if __name__ == '__main__':
 
     with open('day8.in') as f:
         complex_license = f.read()
-        license_tokens = [int(token) for token in complex_license.split(' ')]
-        node = recursive(license_tokens)
-        assert sum(all_entries(node)) == 44838
-        assert node_value(node) == 22198
+
+    license_tokens = [int(token) for token in complex_license.split(' ')]
+    node = recursive(license_tokens)
+    assert sum(all_entries(node)) == 44838
+    assert node_value(node) == 22198

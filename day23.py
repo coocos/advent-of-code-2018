@@ -14,7 +14,9 @@ def manhattan(v1: Vec, v2: Vec) -> int:
 
 
 def parse_bots(lines: List[str]) -> List[Bot]:
-
+    """
+    Parses the input and returns a list of Bots
+    """
     bots: List[Bot] = []
     pattern = r'pos=<(.+?),(.+?),(.+?)>, r=(\d+)'
     for line in lines:
@@ -24,6 +26,67 @@ def parse_bots(lines: List[str]) -> List[Bot]:
     return bots
 
 
+def bots_at(pos: Vec, bots: List[Bot]) -> int:
+    """
+    Returns the amount of bots in range at position
+    """
+    return len([bot for bot in bots if manhattan(pos, bot.pos) <= bot.r])
+
+
+def best_point(bots: List[Bot]) -> int:
+    """
+    Finds the point with most bots in range of the point while keeping
+    the distance from origin to a minimum.
+
+    The algorithm is a hill climbing algorithm which starts at origin.
+    It attempts to find a more dense part of the swarm by scanning at
+    regular intervals around the current position. If a denser point is found,
+    then it is set as the current position, added to a list and the search
+    space formed by the intervals is halved. Then the process repeats until
+    the search area is too small to continue further. At this point the list
+    of the visited densest points can be sorted to find the point which was
+    the most dense yet also closest to the origin.
+
+    Note that this algorithm may get stuck in local optimum, i.e. it probably
+    does not work for all possible inputs.
+    """
+    min_x, *_, max_x = sorted(bot.pos.x for bot in bots)
+    min_y, *_, max_y = sorted(bot.pos.y for bot in bots)
+    min_z, *_, max_z = sorted(bot.pos.z for bot in bots)
+
+    origin = Vec(0, 0, 0)
+    size = (max_x - min_x)  # Size of the search area and search density
+    current = origin  # Start at origin
+    best_points = []  # Densest points
+    next_pos = origin
+    most_bots = 0
+
+    while size > 1:
+
+        # Sample around the current position at regular intervals
+        for x in range(-size, size, size // 2):
+            for y in range(-size, size, size // 2):
+                for z in range(-size, size, size // 2):
+
+                    pos = Vec(current.x + x, current.y + y, current.z + z)
+                    bot_count = bots_at(pos, bots)
+
+                    # New best position found, keep track of it
+                    if bot_count >= most_bots:
+                        most_bots = bot_count
+                        next_pos = pos
+                        best_points.append(pos)
+
+        current = next_pos
+        size //= 2
+        print(f'Bots at {current}: {most_bots}')
+
+    # From the found best points find the one closest to origin
+    best_points.sort(key=lambda point: manhattan(point, origin))
+    best_points.sort(key=lambda point: bots_at(point, bots))
+    return manhattan(best_points[-1], origin)
+
+
 if __name__ == '__main__':
 
     with open('day23.in') as f:
@@ -31,10 +94,19 @@ if __name__ == '__main__':
 
     bots = parse_bots(lines)
 
-    # Figure out how many bots are in range of the strongest nanobot
-    bots_in_range = 0
-    strongest_bot = sorted(bots, key=lambda bot: bot.r)[-1]
-    for bot in bots:
-        if manhattan(strongest_bot.pos, bot.pos) <= strongest_bot.r:
-            bots_in_range += 1
-    assert bots_in_range == 172
+    """
+    First puzzle is trivial - just parse the input and figure out how many
+    bots are in range of the strongest nanobot
+    """
+    largest = max(bots, key=lambda bot: bot.r)
+    in_range = [b for b in bots if manhattan(largest.pos, b.pos) < largest.r]
+    assert len(in_range) == 172
+
+    """
+    Second part is sort of tricky. The solution here uses a hill climbing
+    algorithm, i.e. it steps towards a "denser" part of the nanobot swarm
+    and decreases the size of the step after each step. It seems to work for
+    this input but there's a high chance that the solution could actually
+    get stuck in a local optimum and never find the global optimum.
+    """
+    assert best_point(bots) == 125532607

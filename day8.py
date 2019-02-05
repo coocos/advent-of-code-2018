@@ -1,3 +1,5 @@
+import os
+
 from typing import List
 from collections import namedtuple
 
@@ -78,7 +80,7 @@ if __name__ == '__main__':
     assert sum(all_entries(node)) == 138
     assert node_value(node) == 66
 
-    with open('day8.in') as f:
+    with open(os.path.join('inputs', 'day8.in')) as f:
         complex_license = f.read()
 
     license_tokens = [int(token) for token in complex_license.split(' ')]

@@ -1,5 +1,7 @@
 import re
 import sys
+import os
+
 from typing import List, Tuple
 
 
@@ -120,9 +122,10 @@ def find_message(points: List[Point]) -> int:
 
 if __name__ == '__main__':
 
-    with open('day10.in') as f:
+    with open(os.path.join('inputs', 'day10.in')) as f:
         points = parse(f.read().splitlines())
-        seconds = find_message(points)
-        print(f'Stopped after {seconds} seconds')
-        assert seconds == 10391
-        render(points)
+
+    seconds = find_message(points)
+    print(f'Stopped after {seconds} seconds')
+    assert seconds == 10391
+    render(points)

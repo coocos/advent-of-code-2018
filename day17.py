@@ -1,5 +1,7 @@
 import re
 import sys
+import os
+
 from typing import List, Tuple
 
 """
@@ -19,7 +21,7 @@ def load_data(filename: str) -> Ground:
     regex = r'([xy])=(\d+), ([xy])=(\d+)\.\.(\d+)'
     coords: List[Tuple[int, int]] = []
 
-    with open(filename) as f:
+    with open(os.path.join('inputs', filename)) as f:
         for line in f:
             clay = re.match(regex, line)
             if clay[1] == 'x':

@@ -1,13 +1,6 @@
+import os
 from typing import Tuple, List
 from collections import Counter
-
-
-def read_boxes(filename: str) -> List[str]:
-    """
-    Returns a list of box names read from file
-    """
-    with open(filename) as f:
-        return f.read().splitlines()
 
 
 def generate_checksum_components(box: str) -> Tuple[int, int]:
@@ -57,7 +50,8 @@ def find_common_name_for_boxes(boxes: List[str]) -> str:
 
 if __name__ == '__main__':
 
-    boxes = read_boxes('day2.in')
+    with open(os.path.join('inputs', 'day2.in')) as f:
+        boxes = f.read().splitlines()
 
     # Generate checksum for the first half of the puzzle
     total_twice = 0

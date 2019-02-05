@@ -1,5 +1,6 @@
 import string
 import re
+import os
 from typing import List, Tuple
 
 
@@ -29,17 +30,16 @@ def trigger_reactions(polymer: str) -> str:
 
 if __name__ == '__main__':
 
-    with open('day5.in') as f:
-
+    with open(os.path.join('inputs', 'day5.in')) as f:
         complex_polymer = f.read()
 
-        # Solve first half of the puzzle - the -1 is due to newline
-        assert len(trigger_reactions(complex_polymer)) - 1 == 11814
+    # Solve first half of the puzzle - the -1 is due to newline
+    assert len(trigger_reactions(complex_polymer)) - 1 == 11814
 
-        # Solve second half of the puzzle by removing units alphabetically
-        # and finding the smallest polymer after reactions have been applied
-        polymers: List[Tuple[str, int]] = []
-        for char in string.ascii_lowercase:
-            polymer = re.sub(f'[{char}{char.upper()}]', '', complex_polymer)
-            polymers.append((char, len(trigger_reactions(polymer)) - 1))
-        assert min(polymers, key=lambda x: x[1]) == ('g', 4282)
+    # Solve second half of the puzzle by removing units alphabetically
+    # and finding the smallest polymer after reactions have been applied
+    polymers: List[Tuple[str, int]] = []
+    for char in string.ascii_lowercase:
+        polymer = re.sub(f'[{char}{char.upper()}]', '', complex_polymer)
+        polymers.append((char, len(trigger_reactions(polymer)) - 1))
+    assert min(polymers, key=lambda x: x[1]) == ('g', 4282)

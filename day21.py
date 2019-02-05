@@ -1,3 +1,5 @@
+import os
+
 from collections import namedtuple, deque
 from typing import List
 
@@ -87,7 +89,7 @@ def eqrr(op: Instruction, registers: Registers) -> Registers:
 
 if __name__ == '__main__':
 
-    with open('day21.in') as f:
+    with open(os.path.join('inputs', 'day21.in')) as f:
         lines = f.read().splitlines()
 
     pc = int(lines[0][-1])  # Which register the program counter is stored in

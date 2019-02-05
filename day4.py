@@ -1,4 +1,5 @@
 import re
+import os
 from datetime import datetime, timedelta
 from collections import namedtuple, defaultdict, Counter
 from typing import List, Dict, Tuple
@@ -88,8 +89,9 @@ if __name__ == '__main__':
     assert sleepiest_guard(records, strategy=1) == (10, 24)
     assert sleepiest_guard(records, strategy=2) == (99, 45)
 
-    with open('day4.in') as f:
+    with open(os.path.join('inputs', 'day4.in')) as f:
         complex_data = f.read().splitlines()
-        records = sorted(parse_records(complex_data), key=lambda rec: rec.time)
-        assert sleepiest_guard(records, strategy=1) == (2851, 44)
-        assert sleepiest_guard(records, strategy=2) == (733, 25)
+
+    records = sorted(parse_records(complex_data), key=lambda rec: rec.time)
+    assert sleepiest_guard(records, strategy=1) == (2851, 44)
+    assert sleepiest_guard(records, strategy=2) == (733, 25)

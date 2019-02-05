@@ -1,12 +1,5 @@
+import os
 from typing import List, Generator, Set
-
-
-def read_frequencies(filename: str) -> List[int]:
-    """
-    Reads frequencies from the input file and returns a list of them
-    """
-    with open(filename) as f:
-        return [int(line) for line in f.readlines()]
 
 
 def apply_frequencies(frequencies: List[int], start: int = 0) -> Generator[int, None, None]:
@@ -22,18 +15,21 @@ def apply_frequencies(frequencies: List[int], start: int = 0) -> Generator[int, 
 
 if __name__ == '__main__':
 
-    data = read_frequencies('day1.in')
+    with open(os.path.join('inputs', 'day1.in')) as f:
+        data = [int(line) for line in f]
 
+    # Find the final frequency
     final_frequency = 0
     for frequency in apply_frequencies(data):
         final_frequency = frequency
 
-    print(f'Final frequency: {final_frequency}')
+    assert final_frequency == 479
 
     current_frequency = 0
     previous_frequencies: Set[int] = set()
     duplicate_frequency = None
 
+    # Find the first duplicate frequency
     while duplicate_frequency is None:
         for frequency in apply_frequencies(data, current_frequency):
             current_frequency = frequency
@@ -42,4 +38,4 @@ if __name__ == '__main__':
                 break
             previous_frequencies.add(current_frequency)
 
-    print(f'First duplicate frequency: {duplicate_frequency}')
+    assert duplicate_frequency == 66105

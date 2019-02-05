@@ -73,4 +73,3 @@ if __name__ == '__main__':
     assert largest_fuel_cell(18) == (90, 269, 16)
     assert largest_fuel_cell(42) == (232, 251, 12)
     assert largest_fuel_cell(7803) == (230, 272, 17)
-

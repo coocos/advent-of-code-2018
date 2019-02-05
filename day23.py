@@ -1,4 +1,6 @@
 import re
+import os
+
 from collections import namedtuple
 from typing import List
 
@@ -89,7 +91,7 @@ def best_point(bots: List[Bot]) -> int:
 
 if __name__ == '__main__':
 
-    with open('day23.in') as f:
+    with open(os.path.join('inputs', 'day23.in')) as f:
         lines = f.read().splitlines()
 
     bots = parse_bots(lines)

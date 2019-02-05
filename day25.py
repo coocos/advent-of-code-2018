@@ -1,3 +1,4 @@
+import os
 from collections import namedtuple
 
 Point = namedtuple('Point', 'x, y, z, w')
@@ -17,7 +18,7 @@ class Constellations:
     """
     Union find implementation for finding the constellations.
     """
-    def __init__(self, n):
+    def __init__(self, n: int) -> None:
         self._identifiers = list(range(n))
 
     def union(self, x: int, y: int) -> None:
@@ -29,14 +30,14 @@ class Constellations:
                 self._identifiers[i] = new_identifier
 
     @property
-    def count(self):
+    def count(self) -> int:
         """Returns the amount of constellations"""
         return len(set(self._identifiers))
 
 
 if __name__ == '__main__':
 
-    with open('day25.in') as f:
+    with open(os.path.join('inputs', 'day25.in')) as f:
         points = [Point(*map(int, line.strip().split(','))) for line in f]
 
     constellations = Constellations(len(points))

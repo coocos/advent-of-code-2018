@@ -1,3 +1,5 @@
+import os
+
 from collections import namedtuple, deque
 from typing import List, Tuple, Iterable
 
@@ -205,7 +207,7 @@ def battle(units: List[Unit], cave: Cave) -> bool:
 
 if __name__ == '__main__':
 
-    with open('day15.in') as f:
+    with open(os.path.join('inputs', 'day15.in')) as f:
         description = f.read().splitlines()
 
     """

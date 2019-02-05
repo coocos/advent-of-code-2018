@@ -1,3 +1,5 @@
+import os
+
 from typing import List, Dict
 from collections import namedtuple, deque
 
@@ -119,10 +121,10 @@ if __name__ == '__main__':
     The first half of the puzzle can be solved by constructing a graph of the
     track and then running a simulation of the carts on the graph.
     """
-    with open('day13.in') as f:
+    with open(os.path.join('inputs', 'day13.in')) as f:
         original_track = f.read().splitlines()
-        carts = create_carts(original_track)
 
+    carts = create_carts(original_track)
     crashes: List[Vec] = []
     while not crashes:
         for cart in sorted(carts, key=lambda cart: cart.pos):

@@ -1,4 +1,5 @@
 import re
+import os
 
 from collections import namedtuple
 from typing import Any, Tuple, List, Set
@@ -12,7 +13,7 @@ def read_claims(filename: str) -> Any:
     """
     Reads the claims from a file and returns them as a list
     """
-    with open(filename) as f:
+    with open(os.path.join('inputs', filename)) as f:
         return f.read().splitlines()
 
 

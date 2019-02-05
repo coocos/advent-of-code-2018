@@ -1,3 +1,5 @@
+import os
+
 from copy import deepcopy
 from itertools import chain
 from typing import List
@@ -68,7 +70,7 @@ def resource_value(acres: List[List[str]]) -> int:
 
 if __name__ == '__main__':
 
-    with open('day18.in') as f:
+    with open(os.path.join('inputs', 'day18.in')) as f:
         input_lines = f.read().splitlines()
 
     acres = [list(line) for line in input_lines]

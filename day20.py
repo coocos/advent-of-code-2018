@@ -1,3 +1,5 @@
+import os
+
 from collections import defaultdict, namedtuple, deque
 from typing import List, DefaultDict, Deque, Tuple
 
@@ -87,7 +89,7 @@ def number_of_doors(grid: DefaultDict) -> Tuple[int, int]:
 
 if __name__ == '__main__':
 
-    with open('day20.in') as f:
+    with open(os.path.join('inputs', 'day20.in')) as f:
         regex = f.read()
 
     grid = create_grid(regex)

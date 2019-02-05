@@ -1,3 +1,5 @@
+import os
+
 from typing import List, Dict, Deque
 from collections import deque
 
@@ -44,7 +46,7 @@ def sum_pots(pots: str, offset: int) -> int:
 
 if __name__ == '__main__':
 
-    with open('day12.in') as f:
+    with open(os.path.join('inputs', 'day12.in')) as f:
         scenario = f.read().splitlines()
 
     pots = scenario[0].split(': ')[-1]

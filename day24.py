@@ -1,4 +1,6 @@
+import os
 import re
+
 from copy import deepcopy
 from typing import List, Tuple, Set, Optional
 
@@ -161,7 +163,7 @@ def battle(immune: List[Group], infection: List[Group]) -> Tuple[int, str]:
 
 if __name__ == '__main__':
 
-    with open('day24.in') as f:
+    with open(os.path.join('inputs', 'day24.in')) as f:
         lines = f.read().splitlines()
 
     immune = parse_army(lines[1:lines.index('')], 'immune')

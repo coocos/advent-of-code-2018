@@ -1,3 +1,5 @@
+import os
+
 from collections import namedtuple, defaultdict
 from typing import List, Tuple, DefaultDict
 
@@ -113,10 +115,8 @@ if __name__ == '__main__':
     assert largest_finite_area(simple_coords) == 17
     assert area_near_locations(simple_coords, 32) == 16
 
-    with open('day6.in') as f:
-        coords = []
-        for line in f.read().splitlines():
-            x, y = line.split(', ')
-            coords.append(Coord(int(x), int(y)))
-        assert largest_finite_area(coords) == 2342
-        assert area_near_locations(coords, 10000) == 43302
+    with open(os.path.join('inputs', 'day6.in')) as f:
+        coords = [Coord(*map(int, line.split(', '))) for line in f]
+
+    assert largest_finite_area(coords) == 2342
+    assert area_near_locations(coords, 10000) == 43302

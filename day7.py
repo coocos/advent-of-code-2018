@@ -1,5 +1,7 @@
 import re
 import string
+import os
+
 from typing import List, Dict, Tuple
 from enum import Enum
 
@@ -134,13 +136,13 @@ def execute_steps_in_parallel(steps: List[Step]) -> Tuple[str, int]:
 
 if __name__ == '__main__':
 
-    with open('day7.in') as f:
-
-        # Solve first part of the puzzle
+    with open(os.path.join('inputs', 'day7.in')) as f:
         raw_steps = f.read().splitlines()
-        steps = parse_steps(raw_steps)
-        assert execute_steps(steps) == 'GNJOCHKSWTFMXLYDZABIREPVUQ'
 
-        # Solve second part of the puzzle
-        steps = parse_steps(raw_steps)
-        assert execute_steps_in_parallel(steps) == ('GNOYCHJWKXSTFZLAMBDIREPVUQ', 886)
+    # Solve first part of the puzzle
+    steps = parse_steps(raw_steps)
+    assert execute_steps(steps) == 'GNJOCHKSWTFMXLYDZABIREPVUQ'
+
+    # Solve second part of the puzzle
+    steps = parse_steps(raw_steps)
+    assert execute_steps_in_parallel(steps) == ('GNOYCHJWKXSTFZLAMBDIREPVUQ', 886)

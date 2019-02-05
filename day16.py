@@ -1,3 +1,5 @@
+import os
+
 from collections import namedtuple
 from typing import List, Callable, Set
 
@@ -106,7 +108,7 @@ if __name__ == '__main__':
         eqrr
     ]
 
-    with open('day16.in') as data:
+    with open(os.path.join('inputs', 'day16.in')) as data:
         captured_samples, program = data.read().split('\n\n\n\n')
 
     # Parse captured samples

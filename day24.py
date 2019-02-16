@@ -114,10 +114,8 @@ def battle(immune: List[Group], infection: List[Group]) -> Tuple[int, str]:
             return sum(group.units for group in groups), winner
 
         # Sort for selection phase by effective power and break ties by
-        # relying on stable sorting by secondary criteria
-        groups.sort(key=lambda g: g.initiative, reverse=True)
-        groups.sort(key=lambda g: g.effective_power, reverse=True)
-        groups.sort(key=lambda g: g.name[:2], reverse=True)
+        # secondary criteria
+        groups.sort(key=lambda g: (g.name[:2], g.effective_power, g.initiative), reverse=True)
 
         targeted: Set[str] = set()  # Groups which have already been targeted
 
@@ -135,10 +133,8 @@ def battle(immune: List[Group], infection: List[Group]) -> Tuple[int, str]:
 
             if targets:
 
-                # Find best target by relying on stable sorting to break ties
-                targets.sort(key=lambda t: t[0].initiative, reverse=True)
-                targets.sort(key=lambda t: t[0].effective_power, reverse=True)
-                targets.sort(key=lambda t: t[1], reverse=True)
+                # Find best target
+                targets.sort(key=lambda t: (t[1], t[0].effective_power, t[0].initiative), reverse=True)
                 enemy, damage = targets[0]
 
                 targeted.add(enemy.name)

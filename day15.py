@@ -63,8 +63,7 @@ class Unit:
                     enemies_to_attack.append(enemy)
 
         # Sort by hit points and break ties by reading order to find the target
-        enemies_to_attack.sort(key=lambda e: (e.pos.y, e.pos.x))
-        enemies_to_attack.sort(key=lambda e: e.hp)
+        enemies_to_attack.sort(key=lambda e: (e.hp, e.pos.y, e.pos.x))
         enemy = enemies_to_attack[0]
 
         enemy.hp -= self.attack_power
@@ -164,8 +163,7 @@ def battle(units: List[Unit], cave: Cave) -> bool:
 
         # Find the nearest reachable square in reading order
         nearest = [(pos.x, pos.y, distances[pos]) for pos in reachable]
-        nearest.sort(key=lambda xyd: (xyd[1], xyd[0]))
-        nearest.sort(key=lambda xyd: xyd[2])
+        nearest.sort(key=lambda xyd: (xyd[2], xyd[1], xyd[0]))
         chosen = Vec(nearest[0][0], nearest[0][1])
 
         # Search for the shortest path to the chosen square
@@ -193,8 +191,7 @@ def battle(units: List[Unit], cave: Cave) -> bool:
                     pass
 
         # Find the movement which gives us the shortest path to chosen square
-        movements.sort(key=lambda xyd: (xyd[1], xyd[0]))
-        movements.sort(key=lambda xyd: xyd[2])
+        movements.sort(key=lambda xyd: (xyd[2], xyd[1], xyd[0]))
         movement = Vec(movements[0][0], movements[0][1])
         unit.pos = movement
 

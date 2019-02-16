@@ -84,8 +84,7 @@ def best_point(bots: List[Bot]) -> int:
         print(f'Bots at {current}: {most_bots}')
 
     # From the found best points find the one closest to origin
-    best_points.sort(key=lambda point: manhattan(point, origin))
-    best_points.sort(key=lambda point: bots_at(point, bots))
+    best_points.sort(key=lambda point: (bots_at(point, bots), manhattan(point, origin)))
     return manhattan(best_points[-1], origin)
 
 
